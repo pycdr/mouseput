@@ -23,7 +23,7 @@ try:
 		while 1:
 			pos = g.position()
 			d = str(pos[0])+","+str(pos[1])
-			s.sendall(d)
+			s.sendall(d.endoce("utf8"))
 			d = s.recv(1024)
 			d = d.decode("utf8")
 			if d == "0":
