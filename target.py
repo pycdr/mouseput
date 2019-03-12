@@ -10,18 +10,21 @@ def get_ip():
 		si.connect(("8.8.8.8", 80))
 		si.close()
 		return s.getsockname()[0]
-s.bind((get_ip(),6969))
-s.listen(1)
-h = s.accept()
-while 1:
-	d = h[0].recv(1024)
-	d = str(d)[2:-1].split(",")
-	if len(d) != 2:
-		h[0].sendall(b"0")
-		break
-	try:
-		gui.moveTo(int(d[0]),int(d[1]))
-		h[0].sendall(b"1")
-	except Exception as err:
-		h[0].sendall(b"0")
+try:
+	s.bind((get_ip(),6969))
+	s.listen(1)
+	h = s.accept()
+	while 1:
+		d = h[0].recv(1024)
+		d = str(d)[2:-1].split(",")
+		if len(d) != 2:
+			h[0].sendall(b"0")
+			break
+		try:
+			gui.moveTo(int(d[0]),int(d[1]))
+			h[0].sendall(b"1")
+		except:
+			h[0].sendall(b"0")
+except:
+	pass
 s.close()
