@@ -19,11 +19,13 @@ while 1:
 print("~ start...")
 try:
 	if t == "1":
+		lc = (";  ",";- ",";-)")
+		lx = 0
 		import pyautogui as g
 		while 1:
 			pos = g.position()
 			d = str(pos[0])+","+str(pos[1])
-			s.sendall(d.endoce("utf8"))
+			s.sendall(d.encode("utf8"))
 			d = s.recv(1024)
 			d = d.decode("utf8")
 			if d == "0":
@@ -32,7 +34,10 @@ try:
 					continue
 				break
 			elif d == "1":
-				print("~ fine!")
+				print("\r~ fine! "+lc[lx//10],end="")
+				lx += 1
+				if lx > 29:
+					lx = 0
 		s.close()
 	else:
 		while 1:
